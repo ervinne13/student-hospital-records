@@ -15,7 +15,7 @@
                 caseInsensitive: true
             },
             ajax: {
-                url: "/vital-signs/datatable"
+                url: "/urinalysis/datatable"
             },
             order: [1, "desc"],
             columns: [
@@ -23,7 +23,7 @@
                 {data: 'sy'},
                 {data: 'sem'},
                 {data: 'SN'},
-                {data: 'license_no'}
+                {data: 'date_saved'}
             ],
             columnDefs: [
                 {bSearchable: false, aTargets: [0]},

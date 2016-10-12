@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Modes\VitalSigns;
+use App\Models\Urinalysis;
+use App\Models\UrinalysisRef;
 use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Yajra\Datatables\Datatables;
 
-class VitalSignsController extends Controller {
+class UrinalysisController extends Controller {
 
     /**
      * Display a listing of the resource.
@@ -19,11 +20,11 @@ class VitalSignsController extends Controller {
      * @return Response
      */
     public function index() {
-        return view('pages.vital-signs.index');
+        return view('pages.urinalysis.index');
     }
 
     public function datatable() {
-        return Datatables::of(VitalSigns::query())->make(true);
+        return Datatables::of(Urinalysis::query())->make(true);
     }
 
     /**
@@ -32,14 +33,9 @@ class VitalSignsController extends Controller {
      * @return Response
      */
     public function create() {
-        $currentUser = Auth::user();
-        $vitalSigns  = new VitalSigns();
-
-        if ($currentUser->usertype == 100) {
-            $vitalSigns->license_no = $currentUser->physician_license_no;
-        }
-
-        return view('pages.vital-signs.form', ['vitalSigns' => $vitalSigns, 'mode' => 'ADD']);
+        $urinalysis    = new Urinalysis();
+        $urinalysisRef = UrinalysisRef::all();
+        return view('pages.urinalysis.form', ["urinalysis" => $urinalysis, 'urinalysisRef' => $urinalysisRef, 'mode' => 'ADD']);
     }
 
     /**
@@ -50,16 +46,23 @@ class VitalSignsController extends Controller {
      */
     public function store(Request $request) {
         try {
-            DB::statement('CALL SP_SaveVitalSigns(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);', [
+            DB::statement('CALL SP_SaveUrinalysis(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);', [
                 $request->sy,
                 $request->sem,
                 $request->SN,
-                $request->pulse_rate,
-                $request->blood_pressure,
-                $request->vision,
-                $request->color_vision,
-                $request->hearing,
-                $request->license_no,
+                $request->color,
+                $request->transparency,
+                $request->reaction,
+                $request->sp_gravity,
+                $request->sugar,
+                $request->protein,
+                $request->pus_cells,
+                $request->red_cells,
+                $request->epithelial_cells,
+                $request->m_thread,
+                $request->bacteria,
+                $request->crystals,
+                $request->others,
                 Auth::user()->userid
             ]);
 
@@ -88,8 +91,9 @@ class VitalSignsController extends Controller {
      * @return Response
      */
     public function edit($id) {
-        $vitalSigns = VitalSigns::ConsolidatedId($id)->first();
-        return view('pages.vital-signs.form', ['vitalSigns' => $vitalSigns, 'mode' => 'EDIT']);
+        $urinalysis    = Urinalysis::ConsolidatedId($id)->first();
+        $urinalysisRef = UrinalysisRef::all();
+        return view('pages.urinalysis.form', ["urinalysis" => $urinalysis, 'urinalysisRef' => $urinalysisRef, 'mode' => 'EDIT']);
     }
 
     /**
@@ -101,16 +105,23 @@ class VitalSignsController extends Controller {
      */
     public function update(Request $request, $id) {
         try {
-            DB::statement('CALL SP_SaveVitalSigns(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);', [
+            DB::statement('CALL SP_SaveUrinalysis(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);', [
                 $request->sy,
                 $request->sem,
                 $request->SN,
-                $request->pulse_rate,
-                $request->blood_pressure,
-                $request->vision,
-                $request->color_vision,
-                $request->hearing,
-                $request->license_no,
+                $request->color,
+                $request->transparency,
+                $request->reaction,
+                $request->sp_gravity,
+                $request->sugar,
+                $request->protein,
+                $request->pus_cells,
+                $request->red_cells,
+                $request->epithelial_cells,
+                $request->m_thread,
+                $request->bacteria,
+                $request->crystals,
+                $request->others,
                 Auth::user()->userid
             ]);
 

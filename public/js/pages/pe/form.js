@@ -13,9 +13,9 @@
     }
 
     function initializeForm() {
-        form_utilities.moduleUrl = "/vital-signs";
+        form_utilities.moduleUrl = "/pe";
         form_utilities.updateObjectId = id;
-        form_utilities.onSaveMessage = "Vital Signs Record Saved";
+        form_utilities.onSaveMessage = "Physical Exam Record Saved";
         form_utilities.validate = true;
 
         form_utilities.initializeDefaultProcessing($('.fields-container'));

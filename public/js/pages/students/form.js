@@ -34,9 +34,9 @@
             //  default to the error message if a conversion is not available
             var humanReadableErrorMessage = errorMessage;
 
-            if (errorMessage.indexOf("sn_UNIQUE") > -1) {
+            if (errorMessage.indexOf("SN_UNIQUE") > -1 || (errorMessage.indexOf("Duplicate entry") > -1 && errorMessage.indexOf("PRIMARY") > -1)) {
                 humanReadableErrorMessage = "A student with the same student number already exists";
-                form_utilities.setFieldError('username', humanReadableErrorMessage);
+                form_utilities.setFieldError('SN', humanReadableErrorMessage);
             }
 
             swal("Error!", humanReadableErrorMessage, "error");

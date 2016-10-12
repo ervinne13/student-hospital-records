@@ -13,33 +13,12 @@
                 </a>
             </li>
             <li>
-                <a href="/users">
-                    <span><i class="fa fa-users text-fuchsia"></i> 
-                        Users
-                    </span>
-                </a>
-            </li>
-            <li>
                 <a href="/students">
                     <span><i class="fa fa-graduation-cap text-info"></i> 
                         Students
                     </span>
                 </a>
-            </li>
-            <li>
-                <a href="/colleges">
-                    <span><i class="fa fa-building text-info"></i> 
-                        Colleges
-                    </span>
-                </a>
-            </li>
-            <li>
-                <a href="/logs">
-                    <span><i class="fa fa-file-archive-o text-info"></i> 
-                        Audit Logs
-                    </span>
-                </a>
-            </li>
+            </li>          
 
             <li>
                 <a href="/certification">
@@ -65,8 +44,8 @@
                 <ul class="treeview-menu" style="display: block;">
                     <li><a href="/xray"><i class="fa fa-circle-o"></i> X-Ray</a></li>
                     <li><a href="/hematology"><i class="fa fa-circle-o"></i> Hematology</a></li>
-                    <li><a href="/urinalysis"><i class="fa fa-circle-o"></i> Urinalysis</a></li>
                     <li><a href="/vital-signs"><i class="fa fa-circle-o"></i> Vital Signs</a></li>
+                    <li><a href="/urinalysis"><i class="fa fa-circle-o"></i> Urinalysis</a></li>
                     <li><a href="/pe"><i class="fa fa-circle-o"></i> Physical Exam</a></li>                    
                 </ul>
             </li>

@@ -46,10 +46,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Left side column. contains the logo and sidebar -->
             @if (Auth::user()->type->userdesc == "ADMIN")
             @include('layouts.parts.admin-sidebar')
-            @elseif (Auth::user()->role_name == "TEACHER")
-            @include('layouts.parts.teacher-sidebar')
-            @elseif (Auth::user()->role_name == "VIEWER")
-            @include('layouts.parts.viewer-sidebar')
+            @else
+            @include('layouts.parts.user-sidebar')
             @endif            
 
             <!-- Content Wrapper. Contains page content -->

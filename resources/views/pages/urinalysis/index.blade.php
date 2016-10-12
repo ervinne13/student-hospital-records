@@ -2,7 +2,7 @@
 
 @section('js')
 @parent
-<script src="{{ asset ("/js/pages/students/index.js") }}" type="text/javascript"></script>
+<script src="{{ asset ("/js/pages/urinalysis/index.js") }}" type="text/javascript"></script>
 @endsection
 
 @section('content')
@@ -10,7 +10,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        Students
+        Urinalysis Records
     </h1>
 </section>
 
@@ -26,17 +26,14 @@
                                 <thead>
                                     <tr>
                                         <th>
-                                            <a href="/students/create">
+                                            <a href="/urinalysis/create">
                                                 <i class="fa fa-plus"></i>
                                             </a>
                                         </th>
-                                        <th>SN</th>
-                                        <th>Name</th>
-                                        <th>Age</th>
-                                        <th>College</th>
-                                        <th>Course</th>                                                                                
-                                        <th>Level</th>
-                                        <th>Status</th>
+                                        <th>SY</th>
+                                        <th>Sem.</th>
+                                        <th>Student No.</th>                                        
+                                        <th>Date Saved</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>

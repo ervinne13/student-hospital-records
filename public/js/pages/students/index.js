@@ -22,14 +22,10 @@
                 {data: 'SN'},
                 {data: 'SN'},
                 {data: 'first_name', name: 'first_name'},
-                {data: 'college', name: 'tbl_college.college'},
-                {data: 'course'},
                 {data: 'age'},
-                {data: 'gender'},
+                {data: 'college', name: 'tbl_college.college'},
+                {data: 'course'},                                
                 {data: 'yearlevel'},
-                {data: 'weight'},
-                {data: 'height'},
-                {data: 'complexion'},
                 {data: 'status'}
             ],
             columnDefs: [
@@ -53,16 +49,6 @@
                 },
                 {
                     targets: 6,
-                    render: function (data, type, rowData, meta) {
-                        if (data == 'M') {
-                            return "Male";
-                        } else {
-                            return "Female";
-                        }
-                    }
-                },
-                {
-                    targets: 7,
                     render: function (level, type, rowData, meta) {
                         switch (level) {
                             case 1:
@@ -79,7 +65,7 @@
                     }
                 },
                 {
-                    targets: 11,
+                    targets: 7,
                     render: function (data, type, rowData, meta) {
                         if (data == 0) {
                             return "Healthy";

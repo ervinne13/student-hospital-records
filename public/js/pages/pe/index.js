@@ -15,7 +15,7 @@
                 caseInsensitive: true
             },
             ajax: {
-                url: "/vital-signs/datatable"
+                url: "/pe/datatable"
             },
             order: [1, "desc"],
             columns: [

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Modes\VitalSigns;
+use App\Models\PhysicalExam;
 use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Yajra\Datatables\Datatables;
 
-class VitalSignsController extends Controller {
+
+class PhysicalExamController extends Controller {
 
     /**
      * Display a listing of the resource.
@@ -19,11 +20,11 @@ class VitalSignsController extends Controller {
      * @return Response
      */
     public function index() {
-        return view('pages.vital-signs.index');
+        return view('pages.pe.index');
     }
 
     public function datatable() {
-        return Datatables::of(VitalSigns::query())->make(true);
+        return Datatables::of(PhysicalExam::query())->make(true);
     }
 
     /**
@@ -33,13 +34,13 @@ class VitalSignsController extends Controller {
      */
     public function create() {
         $currentUser = Auth::user();
-        $vitalSigns  = new VitalSigns();
+        $pe          = new PhysicalExam();
 
         if ($currentUser->usertype == 100) {
-            $vitalSigns->license_no = $currentUser->physician_license_no;
+            $pe->license_no = $currentUser->physician_license_no;
         }
 
-        return view('pages.vital-signs.form', ['vitalSigns' => $vitalSigns, 'mode' => 'ADD']);
+        return view('pages.pe.form', ['pe' => $pe, 'mode' => 'ADD']);
     }
 
     /**
@@ -50,15 +51,27 @@ class VitalSignsController extends Controller {
      */
     public function store(Request $request) {
         try {
-            DB::statement('CALL SP_SaveVitalSigns(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);', [
+            DB::statement('CALL SP_SavePE(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);', [
                 $request->sy,
                 $request->sem,
                 $request->SN,
-                $request->pulse_rate,
-                $request->blood_pressure,
-                $request->vision,
-                $request->color_vision,
-                $request->hearing,
+                $request->skin,
+                $request->head_scalp,
+                $request->eyes_external,
+                $request->pupils_opthatmoscopic,
+                $request->ears,
+                $request->nose_sinuses,
+                $request->mouth_throat,
+                $request->neck_ln_thyroid,
+                $request->chest_breast_axilla,
+                $request->lungs,
+                $request->heart,
+                $request->abdomen,
+                $request->back,
+                $request->anus_rectum,
+                $request->gu_system,
+                $request->reflexes,
+                $request->extremities,
                 $request->license_no,
                 Auth::user()->userid
             ]);
@@ -88,8 +101,8 @@ class VitalSignsController extends Controller {
      * @return Response
      */
     public function edit($id) {
-        $vitalSigns = VitalSigns::ConsolidatedId($id)->first();
-        return view('pages.vital-signs.form', ['vitalSigns' => $vitalSigns, 'mode' => 'EDIT']);
+        $pe = PhysicalExam::ConsolidatedId($id)->first();
+        return view('pages.pe.form', ['pe' => $pe, 'mode' => 'EDIT']);
     }
 
     /**
@@ -101,15 +114,27 @@ class VitalSignsController extends Controller {
      */
     public function update(Request $request, $id) {
         try {
-            DB::statement('CALL SP_SaveVitalSigns(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);', [
+            DB::statement('CALL SP_SavePE(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);', [
                 $request->sy,
                 $request->sem,
                 $request->SN,
-                $request->pulse_rate,
-                $request->blood_pressure,
-                $request->vision,
-                $request->color_vision,
-                $request->hearing,
+                $request->skin,
+                $request->head_scalp,
+                $request->eyes_external,
+                $request->pupils_opthatmoscopic,
+                $request->ears,
+                $request->nose_sinuses,
+                $request->mouth_throat,
+                $request->neck_ln_thyroid,
+                $request->chest_breast_axilla,
+                $request->lungs,
+                $request->heart,
+                $request->abdomen,
+                $request->back,
+                $request->anus_rectum,
+                $request->gu_system,
+                $request->reflexes,
+                $request->extremities,
                 $request->license_no,
                 Auth::user()->userid
             ]);

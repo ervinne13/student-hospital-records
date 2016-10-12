@@ -33,7 +33,7 @@
                                         <th>SY</th>
                                         <th>Sem.</th>
                                         <th>Student No.</th>                                        
-                                        <th>Date Saved</th>
+                                        <th>Physician License No.</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>

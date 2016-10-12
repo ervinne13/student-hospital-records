@@ -4,6 +4,32 @@
 
 (function () {
     $(document).ready(function () {
+        initializeUI();
+        initializeEvents();
+        initializeFormUtilities();
+    });
+
+    function initializeUI() {
+        //  show if physician        
+        showLicenseNo($('[name=usertype]').val() == 100);
+    }
+
+    function initializeEvents() {
+        $('[name=usertype]').change(function () {
+            //  show if physician
+            showLicenseNo($(this).val() == 100);
+        });
+    }
+
+    function showLicenseNo(show) {
+        if (show) {
+            $('#license-no-container').css('display', 'block');
+        } else {
+            $('#license-no-container').css('display', 'none');
+        }
+    }
+
+    function initializeFormUtilities() {
         form_utilities.moduleUrl = "/users";
         form_utilities.updateObjectId = userid;
         form_utilities.onSaveMessage = "User Account Saved";
@@ -39,5 +65,6 @@
 
             swal("Error!", humanReadableErrorMessage, "error");
         };
-    });
+    }
+
 })();

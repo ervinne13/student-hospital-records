@@ -32,8 +32,9 @@ class HematologyController extends Controller {
      * @return Response
      */
     public function create() {
-        $hematology = new Hematology();
-        return view('pages.hematology.form', ["hematology" => $hematology, "mode" => "ADD"]);
+        $hematology    = new Hematology();
+        $hematologyRef = \App\Models\HematologyRef::all();
+        return view('pages.hematology.form', ["hematology" => $hematology, "hematologyRef" => $hematologyRef, "mode" => "ADD"]);
     }
 
     /**

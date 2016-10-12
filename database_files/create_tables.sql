@@ -7,6 +7,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema student-hospital-records
 -- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `student-hospital-records` ;
 
 -- -----------------------------------------------------
 -- Schema student-hospital-records
@@ -32,9 +33,12 @@ CREATE TABLE IF NOT EXISTS `student-hospital-records`.`tbl_useraccount` (
   `username` VARCHAR(100) NOT NULL,
   `password` VARCHAR(100) NULL,
   `complete_name` VARCHAR(100) NOT NULL,
+  `physician_license_no` VARCHAR(100) NULL,
   `usertype` INT UNSIGNED NOT NULL,
   `modifieddate` TIMESTAMP NULL,
   `modifiedby` INT UNSIGNED NULL,
+  `last_session_id` VARCHAR(100) NULL,
+  `remember_token` VARCHAR(120) NULL,
   PRIMARY KEY (`userid`, `usertype`),
   UNIQUE INDEX `username_UNIQUE` (`username` ASC),
   INDEX `fk_tbl_studentaccount_tbl_studentaccount_idx` (`modifiedby` ASC),
@@ -58,7 +62,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `student-hospital-records`.`tbl_activitylog` (
   `logno` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `logdesc` VARCHAR(100) NOT NULL,
-  `logdate` TIMESTAMP NULL,
+  `logdate` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   `loguser` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`logno`, `loguser`),
   INDEX `fk_tbl_activitylog_tbl_useraccount1_idx` (`loguser` ASC),
@@ -74,10 +78,11 @@ ENGINE = InnoDB;
 -- Table `student-hospital-records`.`tbl_college`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `student-hospital-records`.`tbl_college` (
-  `collegeid` INT UNSIGNED NOT NULL,
+  `collegeid` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `college` VARCHAR(10) NOT NULL,
   `collegedesc` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`collegeid`))
+  PRIMARY KEY (`collegeid`),
+  UNIQUE INDEX `college_UNIQUE` (`college` ASC))
 ENGINE = InnoDB;
 
 
@@ -198,17 +203,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `student-hospital-records`.`tbl_physicianaccount`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `student-hospital-records`.`tbl_physicianaccount` (
-  `license_no` INT UNSIGNED NOT NULL,
-  `physician_name` VARCHAR(255) NOT NULL,
-  `password` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`license_no`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `student-hospital-records`.`tbl_physicalexam`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `student-hospital-records`.`tbl_physicalexam` (
@@ -232,18 +226,12 @@ CREATE TABLE IF NOT EXISTS `student-hospital-records`.`tbl_physicalexam` (
   `gu_system` VARCHAR(255) NULL,
   `reflexes` VARCHAR(255) NULL,
   `extremities` VARCHAR(255) NULL,
-  `license_no` INT UNSIGNED NOT NULL,
-  PRIMARY KEY (`sy`, `sem`, `SN`, `license_no`),
+  `license_no` INT UNSIGNED NULL,
+  PRIMARY KEY (`sy`, `sem`, `SN`),
   INDEX `fk_tbl_physicalexam_tbl_studentlist1_idx` (`SN` ASC),
-  INDEX `fk_tbl_physicalexam_tbl_physicianaccount1_idx` (`license_no` ASC),
   CONSTRAINT `fk_tbl_physicalexam_tbl_studentlist1`
     FOREIGN KEY (`SN`)
     REFERENCES `student-hospital-records`.`tbl_studentlist` (`SN`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_tbl_physicalexam_tbl_physicianaccount1`
-    FOREIGN KEY (`license_no`)
-    REFERENCES `student-hospital-records`.`tbl_physicianaccount` (`license_no`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -286,7 +274,7 @@ CREATE TABLE IF NOT EXISTS `student-hospital-records`.`tbl_urinalysis` (
   `reaction` VARCHAR(45) NULL,
   `sp_gravity` VARCHAR(45) NULL,
   `sugar` VARCHAR(45) NULL,
-  `protien` VARCHAR(45) NULL,
+  `protein` VARCHAR(45) NULL,
   `pus_cells` VARCHAR(45) NULL,
   `red_cells` VARCHAR(45) NULL,
   `epithelial_cells` VARCHAR(45) NULL,
@@ -317,18 +305,12 @@ CREATE TABLE IF NOT EXISTS `student-hospital-records`.`tbl_vitalsigns` (
   `vision` VARCHAR(255) NULL,
   `color_vision` VARCHAR(255) NULL,
   `hearing` VARCHAR(255) NULL,
-  `license_no` INT UNSIGNED NOT NULL,
-  PRIMARY KEY (`sy`, `sem`, `SN`, `license_no`),
+  `license_no` INT UNSIGNED NULL,
+  PRIMARY KEY (`sy`, `sem`, `SN`),
   INDEX `fk_tbl_vitalsigns_tbl_studentlist1_idx` (`SN` ASC),
-  INDEX `fk_tbl_vitalsigns_tbl_physicalexam1_idx` (`license_no` ASC),
   CONSTRAINT `fk_tbl_vitalsigns_tbl_studentlist1`
     FOREIGN KEY (`SN`)
     REFERENCES `student-hospital-records`.`tbl_studentlist` (`SN`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_tbl_vitalsigns_tbl_physicalexam1`
-    FOREIGN KEY (`license_no`)
-    REFERENCES `student-hospital-records`.`tbl_physicalexam` (`license_no`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -339,12 +321,12 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `student-hospital-records`.`tbl_xray` (
   `sy` VARCHAR(10) NOT NULL,
-  `sem` VARCHAR(10) NULL,
+  `sem` VARCHAR(10) NOT NULL,
   `SN` BIGINT UNSIGNED NOT NULL,
   `findings` VARCHAR(255) NULL,
   `image_url` VARCHAR(255) NULL,
   `date_saved` TIMESTAMP NULL,
-  PRIMARY KEY (`sy`, `SN`),
+  PRIMARY KEY (`sy`, `SN`, `sem`),
   INDEX `fk_tbl_xray_tbl_studentlist1_idx` (`SN` ASC),
   CONSTRAINT `fk_tbl_xray_tbl_studentlist1`
     FOREIGN KEY (`SN`)

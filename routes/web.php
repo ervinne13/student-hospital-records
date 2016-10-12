@@ -41,5 +41,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('vital-signs/datatable', 'VitalSignsController@datatable');
     Route::resource('vital-signs', 'VitalSignsController');
 
+    Route::get('pe/datatable', 'PhysicalExamController@datatable');
+    Route::resource('pe', 'PhysicalExamController');
+
+    Route::get('urinalysis/datatable', 'UrinalysisController@datatable');
+    Route::resource('urinalysis', 'UrinalysisController');
+
     // </editor-fold>
 });

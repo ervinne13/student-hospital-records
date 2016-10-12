@@ -39,13 +39,24 @@ class CreateStoredProcedures extends Migration {
         DB::unprepared("DROP procedure IF EXISTS SP_RegisterUserAccount");
         DB::unprepared("DROP procedure IF EXISTS SP_UpdateUserAccount");
         DB::unprepared("DROP procedure IF EXISTS SP_SaveCollege");
-        
+
         //  Datatables
         DB::unprepared("DROP procedure IF EXISTS SP_UsersDatatable");
-        
+        DB::unprepared("DROP procedure IF EXISTS SP_StudentsDatatable");
+        DB::unprepared("DROP procedure IF EXISTS SP_StudentsDatatable");
+        DB::unprepared("DROP procedure IF EXISTS SP_UrinalysisDatatable");
+        DB::unprepared("DROP procedure IF EXISTS SP_HematologyDatatable");
+        DB::unprepared("DROP procedure IF EXISTS SP_PEDatatable");
+
         //  Laboratory
         DB::unprepared("DROP procedure IF EXISTS SP_SaveXRay");
         DB::unprepared("DROP procedure IF EXISTS SP_SaveHematology");
+        DB::unprepared("DROP procedure IF EXISTS SP_SaveVitalSigns");
+        DB::unprepared("DROP procedure IF EXISTS SP_SavePE");
+        DB::unprepared("DROP procedure IF EXISTS SP_SaveUrinalysis");
+        DB::unprepared("DROP procedure IF EXISTS SP_SaveMedicalHistory");
+
+        DB::unprepared("DROP procedure IF EXISTS SP_SaveCertifiation");
     }
 
 }

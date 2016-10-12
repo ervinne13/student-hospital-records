@@ -46,10 +46,14 @@
                                     <label>User Type</label>
                                     <select name="usertype" required class="form-control">
                                         @foreach($userTypes AS $type)
-                                        <?php $selected = $type->typeid == $user->usertype ?>
-                                        <option value="{{$type->typeid}}">{{$type->userdesc}}</option>
+                                        <?php $selected = $type->typeid == $user->usertype ? "selected" : "" ?>
+                                        <option value="{{$type->typeid}}" {{$selected}}>{{$type->userdesc}}</option>
                                         @endforeach
                                     </select>
+                                </div>
+                                <div id="license-no-container" class="form-group">
+                                    <label>License No.</label>
+                                    <input type="text" name="physician_license_no" class="form-control" value="{{ $user->physician_license_no }}">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-sm-12">

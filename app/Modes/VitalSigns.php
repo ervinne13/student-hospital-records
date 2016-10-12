@@ -2,9 +2,9 @@
 
 namespace App\Modes;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\SYSemSNBaseModel;
 
-class VitalSigns extends Model {
+class VitalSigns extends SYSemSNBaseModel {
 
     protected $table   = "tbl_vitalsigns";
     public $timestamps = false;

@@ -47,16 +47,17 @@ class UsersController extends Controller {
     public function store(Request $request) {
 
         $currentUser    = Auth::user();
-        $hashedPassword = \Hash::make($request->password);
+        $hashedPassword = \Hash::make($request->new_password);
 
         try {
-            DB::statement('CALL SP_RegisterUserAccount(?, ?, ?, ?, ?, ?, ?, ?);', [
+            DB::statement('CALL SP_RegisterUserAccount(?, ?, ?, ?, ?, ?, ?, ?, ?);', [
                 $request->username,
                 $request->complete_name,
                 $request->usertype,
+                $request->physician_license_no,
                 $currentUser->userid,
-                $request->password,
-                $request->password_repeat,
+                $request->new_password,
+                $request->new_password_repeat,
                 $hashedPassword,
                 Auth::user()->userid
             ]);
