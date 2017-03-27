@@ -35,10 +35,12 @@
                         var view = datatable_utilities.getDefaultViewAction(id);
                         var actions = [view];
 
+                        if (username == "Administrator") {
+                            actions.push(datatable_utilities.getDefaultEditAction(id));
+                        }
+
                         if (rowData.username != "Administrator") {
                             actions.push(datatable_utilities.getDefaultDeleteAction(id));
-                        } else {
-                            actions.push(datatable_utilities.getDefaultEditAction(id));
                         }
 
                         var view = datatable_utilities.getInlineActionsView(actions);
