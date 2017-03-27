@@ -22,7 +22,7 @@
                 {data: 'userid'},
                 {data: 'username'},
                 {data: 'complete_name'},
-                {data: 'userdesc', name: 'type.userdesc'}
+                {data: 'userdesc', name: 'userdesc'}
             ],
             columnDefs: [
                 {bSearchable: false, aTargets: [0]},
