@@ -46,3 +46,46 @@ datatable_utilities.getDefaultDeleteAction = function (id) {
         icon: "fa-times"
     };
 };
+
+
+//<editor-fold defaultstate="collapsed" desc="Actions">
+datatable_utilities.initializeDeleteAction = function () {
+
+    $(document).on('click', '.action-delete', function (e) {
+        e.preventDefault();
+
+        var id = $(this).data('id');
+        var url = window.location.href + "/" + id;
+
+        swal({
+            title: "Are you sure?",
+            text: "This record will be permanently deleted!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            closeOnConfirm: false
+        }).then(function () {
+            $.ajax({
+                url: url,
+                type: "DELETE",
+                success: function (response) {
+                    console.log(response);
+                    swal("Success", "Record deleted", "success");
+
+                    setTimeout(function () {
+                        location.reload();
+                    }, 1500);
+
+                },
+                error: function (response) {
+                    console.error(response);
+                    swal("Error", response.responseText, "error");
+                }
+            });
+        });
+    });
+
+
+};
+//</editor-fold>

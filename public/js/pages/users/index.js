@@ -5,6 +5,7 @@
 
     $(document).ready(function () {
         initializeTable();
+        datatable_utilities.initializeDeleteAction();
     });
 
     function initializeTable() {
@@ -32,9 +33,13 @@
                     render: function (id, type, rowData, meta) {
 
                         var editAction = datatable_utilities.getDefaultEditAction(id);
-//                        var viewAction = datatable_utilities.getDefaultViewAction(id);
-//                        var view = datatable_utilities.getInlineActionsView([viewAction, editAction]);
-                        var view = datatable_utilities.getInlineActionsView([editAction]);
+                        var actions = [editAction];
+
+                        if (rowData.username != "Administrator") {
+                            actions.push(datatable_utilities.getDefaultDeleteAction(id));
+                        }
+
+                        var view = datatable_utilities.getInlineActionsView(actions);
 
                         return view;
                     }

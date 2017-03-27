@@ -160,7 +160,13 @@ class UsersController extends Controller {
      * @return Response
      */
     public function destroy($id) {
-        //
+        try {
+            $user = User::find($id);
+            $user->delete();
+        } catch (\Exception $e) {
+//            return response($e->getMessage(), 500);
+            return response("Unable to delete user, it might already be used in other related data. For data integrity protection, deletion is prohibited.", 500);
+        }
     }
 
 }
