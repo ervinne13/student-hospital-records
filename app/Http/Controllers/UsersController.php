@@ -16,7 +16,7 @@ use Yajra\Datatables\Datatables;
 class UsersController extends Controller {
 
     public function index() {
-        return view('pages.users.index');
+        return view('pages.users.index', ["user" => Auth::user()]);
     }
 
     public function datatable() {

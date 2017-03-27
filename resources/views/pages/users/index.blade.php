@@ -2,6 +2,9 @@
 
 @section('js')
 @parent
+<script type="text/javascript">
+    var username = '{{$user->username}}';
+</script>
 <script src="{{ asset ("/js/pages/users/index.js") }}" type="text/javascript"></script>
 @endsection
 

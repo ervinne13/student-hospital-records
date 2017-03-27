@@ -3,8 +3,7 @@
 @section('js')
 @parent
 <script type='text/javascript'>
-    var userid = '{{$user->userid}}';
-    var username = '{{$user->username}}';
+    var userid = '{{$user->userid}}';    
     var mode = '{{$mode}}';
 </script>
 <script src="{{ asset ("/js/pages/users/form.js") }}" type="text/javascript"></script>
