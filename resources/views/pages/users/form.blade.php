@@ -16,7 +16,13 @@
     <h1>
         User Account
         <small>
-            {{ ($mode == "ADD" ? "Register New" : "Edit") }}
+            @if ($mode == "ADD")
+            Register New
+            @elseif ($mode == "EDIT")
+            Edit
+            @else
+            View
+            @endif            
         </small>       
     </h1>
 </section>
@@ -63,6 +69,8 @@
                                     <input type="password" {{$mode == "ADD" ? "Required" : ""}} name="password" class="form-control">
                                 </div>
                                 @endif
+
+                                @if($mode != "VIEW")
                                 <div class="form-group">
                                     <label>{{$mode == "ADD" ? "" : "New"}} Password</label>
                                     <input type="password" {{$mode == "ADD" ? "Required" : ""}}  name="new_password" class="form-control">
@@ -71,6 +79,7 @@
                                     <label>{{$mode == "ADD" ? "" : "New"}} Password Repeat</label>
                                     <input type="password" {{$mode == "ADD" ? "Required" : ""}} name="new_password_repeat" class="form-control">
                                 </div>
+                                @endif
                             </div>
                         </div>
                     </form>

@@ -4,5 +4,5 @@
         University of the East - CDB 112 Database Management Systems 2
     </div>
     <!-- Default to the left -->
-    <strong>Copyright © 2016 <a href="https://www.facebook.com/nathaniel.octavianoski">Nathaniel</a>.</strong> All rights reserved.
+    <strong>Copyright © 2016 <a href="https://ervinne13.github.io">Ervinne Sodusta</a>.</strong> All rights reserved.
 </footer>

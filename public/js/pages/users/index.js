@@ -32,11 +32,13 @@
                     targets: 0,
                     render: function (id, type, rowData, meta) {
 
-                        var editAction = datatable_utilities.getDefaultEditAction(id);
-                        var actions = [editAction];
+                        var view = datatable_utilities.getDefaultViewAction(id);
+                        var actions = [view];
 
                         if (rowData.username != "Administrator") {
                             actions.push(datatable_utilities.getDefaultDeleteAction(id));
+                        } else {
+                            actions.push(datatable_utilities.getDefaultEditAction(id));
                         }
 
                         var view = datatable_utilities.getInlineActionsView(actions);

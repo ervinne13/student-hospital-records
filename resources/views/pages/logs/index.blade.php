@@ -26,7 +26,7 @@
                                 <thead>
                                     <tr>
                                         <th></th>
-                                        <th>Log No.</th>
+                                        <!--<th>Log No.</th>-->
                                         <!--<th>Log By User Id</th>-->
                                         <th>Log By User Name</th>
                                         <th>Log Action</th>

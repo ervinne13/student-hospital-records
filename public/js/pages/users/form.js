@@ -12,6 +12,11 @@
     function initializeUI() {
         //  show if physician        
         showLicenseNo($('[name=usertype]').val() == 100);
+        
+        if (mode == "VIEW") {
+            $('.form-control').prop('disabled', true);
+        }
+        
     }
 
     function initializeEvents() {

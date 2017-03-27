@@ -20,7 +20,7 @@
             order: [1, "desc"],
             columns: [
                 {data: 'logno'},
-                {data: 'logno'},
+                //{data: 'logno'},
 //                {data: 'userid', name: 'tbl_useraccount.userid'},
                 {data: 'complete_name', name: 'tbl_useraccount.complete_name'},
                 {data: 'logdesc'},

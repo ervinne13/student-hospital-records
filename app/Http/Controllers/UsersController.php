@@ -75,7 +75,9 @@ class UsersController extends Controller {
      * @return Response
      */
     public function show($id) {
-        //
+        $user      = User::find($id);
+        $userTypes = UserType::all();
+        return view('pages.users.form', ["user" => $user, "mode" => "VIEW", "userTypes" => $userTypes]);
     }
 
     /**
