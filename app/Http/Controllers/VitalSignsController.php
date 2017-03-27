@@ -78,7 +78,8 @@ class VitalSignsController extends Controller {
      * @return Response
      */
     public function show($id) {
-        //
+        $vitalSigns = VitalSigns::ConsolidatedId($id)->first();
+        return view('pages.vital-signs.form', ['vitalSigns' => $vitalSigns, 'mode' => 'VIEW']);
     }
 
     /**

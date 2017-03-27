@@ -67,7 +67,13 @@ class XRayController extends Controller {
      * @return Response
      */
     public function show($id) {
-        //
+        $xray = XRay::ConsolidatedId($id)->first();
+
+        if ($xray) {
+            return view('pages.xray.form', ["xray" => $xray, "mode" => "VIEW"]);
+        } else {
+            return response("Record not found", 404);
+        }
     }
 
     /**

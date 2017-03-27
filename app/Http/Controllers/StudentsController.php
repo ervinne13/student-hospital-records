@@ -102,7 +102,17 @@ class StudentsController extends Controller {
      * @return Response
      */
     public function show($id) {
-        
+        $student  = Student::find($id);
+        $colleges = College::all();
+        return view('pages.students.form', [
+            'student'           => $student,
+            "colleges"          => $colleges,
+            "yearLevels"        => $this->yearLevels,
+            "genders"           => $this->genders,
+            "civilStatusList"   => $this->civilStatusList,
+            "illnessStatusList" => $this->illnessStatusList,
+            'mode'              => "VIEW"
+        ]);
     }
 
     /**

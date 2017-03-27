@@ -77,7 +77,9 @@ class HematologyController extends Controller {
      * @return Response
      */
     public function show($id) {
-        //
+        $hematology = Hematology::ConsolidatedId($id)->first();
+        $hematologyRef = \App\Models\HematologyRef::all();
+        return view('pages.hematology.form', ["hematology" => $hematology, "hematologyRef" => $hematologyRef, "mode" => "VIEW"]);
     }
 
     /**
@@ -88,7 +90,8 @@ class HematologyController extends Controller {
      */
     public function edit($id) {
         $hematology = Hematology::ConsolidatedId($id)->first();
-        return view('pages.hematology.form', ["hematology" => $hematology, "mode" => "EDIT"]);
+        $hematologyRef = \App\Models\HematologyRef::all();
+        return view('pages.hematology.form', ["hematology" => $hematology, "hematologyRef" => $hematologyRef, "mode" => "EDIT"]);
     }
 
     /**

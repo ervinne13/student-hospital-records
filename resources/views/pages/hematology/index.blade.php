@@ -2,6 +2,10 @@
 
 @section('js')
 @parent
+<script type="text/javascript">
+    var user = {!! Auth::user() !!}
+    ;
+</script>
 <script src="{{ asset ("/js/pages/hematology/index.js") }}" type="text/javascript"></script>
 @endsection
 

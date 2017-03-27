@@ -81,7 +81,9 @@ class UrinalysisController extends Controller {
      * @return Response
      */
     public function show($id) {
-        //
+        $urinalysis    = Urinalysis::ConsolidatedId($id)->first();
+        $urinalysisRef = UrinalysisRef::all();
+        return view('pages.urinalysis.form', ["urinalysis" => $urinalysis, 'urinalysisRef' => $urinalysisRef, 'mode' => 'VIEW']);
     }
 
     /**

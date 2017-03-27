@@ -24,7 +24,7 @@
                 {data: 'first_name', name: 'first_name'},
                 {data: 'age'},
                 {data: 'college', name: 'tbl_college.college'},
-                {data: 'course'},                                
+                {data: 'course'},
                 {data: 'yearlevel'},
                 {data: 'status'}
             ],
@@ -35,8 +35,14 @@
                     targets: 0,
                     render: function (id, type, rowData, meta) {
 
-                        var editAction = datatable_utilities.getDefaultEditAction(id);
-                        var view = datatable_utilities.getInlineActionsView([editAction]);
+                        var viewAction = datatable_utilities.getDefaultViewAction(id);
+                        var actions = [viewAction];
+
+                        if (user.user_type == "999") {
+                            actions.push(datatable_utilities.getDefaultEditAction(id));
+                        }
+
+                        var view = datatable_utilities.getInlineActionsView(actions);
 
                         return view;
                     }

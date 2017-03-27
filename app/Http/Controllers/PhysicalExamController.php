@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Yajra\Datatables\Datatables;
 
-
 class PhysicalExamController extends Controller {
 
     /**
@@ -91,7 +90,8 @@ class PhysicalExamController extends Controller {
      * @return Response
      */
     public function show($id) {
-        //
+        $pe = PhysicalExam::ConsolidatedId($id)->first();
+        return view('pages.pe.form', ['pe' => $pe, 'mode' => 'VIEW']);
     }
 
     /**
