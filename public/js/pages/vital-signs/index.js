@@ -36,9 +36,9 @@
 
                         var viewAction = datatable_utilities.getDefaultViewAction(id);
                         var actions = [viewAction];
-                        
+
                         if (user.usertype == "999") {
-                            actions.push(datatable_utilities.getDefaultEditAction(id));                        
+                            actions.push(datatable_utilities.getDefaultEditAction(id));
                         }
 
                         var view = datatable_utilities.getInlineActionsView(actions);
