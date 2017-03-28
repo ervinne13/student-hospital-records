@@ -6,6 +6,10 @@
     $(document).ready(function () {
         initializeUI();
         initializeForm();
+
+        if (mode == "VIEW") {
+            $('.form-control').prop('disabled', true);
+        }
     });
 
     function initializeUI() {

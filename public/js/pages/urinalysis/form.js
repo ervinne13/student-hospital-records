@@ -11,6 +11,10 @@
         initializeForm();
         prepareCriteria();
         initializeEvents();
+        
+        if (mode == "VIEW") {
+            $('.form-control').prop('disabled', true);
+        }
     });
 
     function prepareCriteria() {

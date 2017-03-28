@@ -7,6 +7,10 @@
         initializeUI();
         initializeEvents();
         initializeFormUtilities();
+        
+        if (mode == "VIEW") {
+            $('.form-control').prop('disabled', true);
+        }
     });
 
     function initializeUI() {

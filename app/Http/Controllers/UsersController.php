@@ -118,6 +118,7 @@ class UsersController extends Controller {
                 try {
                     DB::beginTransaction();
                     $user->fill($request->toArray());
+                    $user->password = \Hash::make($request->new_password);
                     $user->save();
                     ActivityLog::insert([
                         "logdesc" => "Updated user {$user->userid}",
@@ -139,8 +140,8 @@ class UsersController extends Controller {
 
             try {
                 DB::beginTransaction();
-                $user->fill($request->toArray());
-                $user->save();
+                $user->fill($updates);
+                $user->update();
                 ActivityLog::insert([
                     "logdesc" => "Updated user {$user->userid}",
                     "loguser" => Auth::user()->userid
