@@ -30,9 +30,11 @@
                                 <thead>
                                     <tr>
                                         <th>
+                                            @if (Auth::user()->usertype == 999)
                                             <a href="/hematology/create">
                                                 <i class="fa fa-plus"></i>
                                             </a>
+                                            @endif
                                         </th>
                                         <th>SY</th>
                                         <th>Sem.</th>

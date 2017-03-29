@@ -32,9 +32,11 @@
                                 <thead>
                                     <tr>
                                         <th>
+                                            @if (Auth::user()->usertype == 999)
                                             <a href="/students/create">
                                                 <i class="fa fa-plus"></i>
                                             </a>
+                                            @endif
                                         </th>
                                         <th>SN</th>
                                         <th>Name</th>

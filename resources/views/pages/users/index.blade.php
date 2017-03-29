@@ -29,9 +29,11 @@
                                 <thead>
                                     <tr>
                                         <th>
+                                            @if (Auth::user()->usertype == 999)
                                             <a href="/users/create">
                                                 <i class="fa fa-plus"></i>
                                             </a>
+                                            @endif
                                         </th>
                                         <th>Username</th>
                                         <th>Complete Name</th>

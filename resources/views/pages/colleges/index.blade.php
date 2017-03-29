@@ -26,9 +26,11 @@
                                 <thead>
                                     <tr>
                                         <th>
+                                            @if (Auth::user()->usertype == 999)
                                             <a href="/colleges/create">
                                                 <i class="fa fa-plus"></i>
                                             </a>
+                                            @endif
                                         </th>
                                         <th>College ID</th>
                                         <th>College Code</th>
